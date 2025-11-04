@@ -32,3 +32,17 @@ import torch_geometric, torch_scatter, torch_sparse, torch_cluster
 print("PyG OK:", torch_geometric.__version__)
 PY
 ```
+
+Install TensorRT 8.x for CUDA 11.x
+```
+# 1) Add NVIDIA repo for the desired TensorRT 8.x (CUDA 11.x)  — follow the doc page you select
+# 2) Install TensorRT runtime + Python bindings
+sudo apt-get update
+sudo apt-get install -y \
+  tensorrt \
+  libnvinfer8 libnvinfer-plugin8 libnvonnxparsers8 libnvparsers8 \
+  python3-libnvinfer python3-libnvinfer-dev
+
+# (optional) utilities
+sudo apt-get install -y uff-converter-tf
+```
