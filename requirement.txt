@@ -1,0 +1,35 @@
+# core
+numpy==1.23.5
+pillow==10.4.0
+tqdm==4.66.4
+PyYAML==6.0.1
+Cython==3.0.11
+
+# vision / 3D (CPU wheels are fine)
+opencv-python==4.10.0.84
+open3d==0.18.0
+plyfile==1.1
+pycocotools==2.0.5
+pyvips==2.2.3
+
+# transformers (newer releases generally ok, but if you see torch-version checks, pin to ~4.30)
+transformers==4.53.2
+
+# ONNX (CPU)
+onnx==1.15.0
+onnxruntime==1.19.0
+
+# PyTorch (CUDA 11.1 wheels) — install via commands below, not here
+# torch==1.9.1+cu111
+# torchvision==0.10.1+cu111
+# torchaudio==0.9.1
+
+# PyTorch Geometric core + extensions (install via commands below, not here)
+# torch-geometric==2.0.4
+# torch-scatter==2.0.8
+# torch-sparse==0.6.12
+# torch-cluster==1.5.9
+# torch-spline-conv==1.2.1
+
+# Lightning (must match torch 1.9.x)
+pytorch-lightning==1.7.7
