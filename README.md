@@ -36,7 +36,11 @@ PY
 Install TensorRT 8.x for CUDA 11.x
 
 attempt 2
-Expose the shared libs at runtime:
+Fast, proven path (tar + wheel; no apt)
+
+Download a CUDA-11.x TensorRT tarball (x86_64) from NVIDIA archives — TensorRT 8.2.5 is a good fit and explicitly supports CUDA 11.0–11.5 (incl. 11.2). [NVIDIA Docs](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-825/install-guide/index.html)
+
+Extract & install the Python wheel that matches your Python:
 ```
 # example — adjust to your exact file name & location
 tar -xzf TensorRT-8.2.5.*.Linux.x86_64-gnu.cuda-11.*.cudnn8.*.tar.gz
