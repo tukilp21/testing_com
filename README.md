@@ -34,6 +34,24 @@ PY
 ```
 
 Install TensorRT 8.x for CUDA 11.x
+
+attempt 2
+```
+# example — adjust to your exact file name & location
+tar -xzf TensorRT-8.2.5.*.Linux.x86_64-gnu.cuda-11.*.cudnn8.*.tar.gz
+cd TensorRT-8.2.5.*
+
+# Install the Python bindings (pick the wheel that matches your Python):
+python -m pip install python/tensorrt-8.2.5.*-cp39-none-linux_x86_64.whl
+# (if you also need parsers / extras)
+python -m pip install python/onnx_graphsurgeon-*.whl  # optional
+
+#Expose the shared libs at runtime:
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$(pwd)/lib"
+# add that line to ~/.bashrc so it persists
+
+```
+
 ```
 # 1) Add NVIDIA repo for the desired TensorRT 8.x (CUDA 11.x)  — follow the doc page you select
 # 2) Install TensorRT runtime + Python bindings
