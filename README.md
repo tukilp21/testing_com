@@ -2,10 +2,10 @@
 for transferring command line while implementing [FROSS]([url](https://github.com/Howardkhh/FROSS?tab=readme-ov-file#3-run-orb-slam3-on-replicassg))
 
 https://chatgpt.com/share/690adfa4-5648-8005-b49e-a7a68402671b
+
 ---
 [download script]([url](https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432)) for 3RScan dataset
-
-
+https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432
 ```
 # fresh venv recommended
 python -m pip install --upgrade wheel setuptools
