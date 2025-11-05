@@ -26,18 +26,10 @@ pip install torch-geometric==2.0.4
 Quick validation
 
 ```
-python - <<'PY'
-import torch
-print("torch:", torch.__version__, "cuda:", torch.version.cuda, "cuda_available:", torch.cuda.is_available())
-import torch_geometric, torch_scatter, torch_sparse, torch_cluster
 print("PyG OK:", torch_geometric.__version__)
-PY
 ```
 
 Install TensorRT 8.x for CUDA 11.x
-
-attempt 2
-Fast, proven path (tar + wheel; no apt)
 
 Download a CUDA-11.x TensorRT tarball (x86_64) from NVIDIA archives — TensorRT 8.2.5 is a good fit and explicitly supports CUDA 11.0–11.5 (incl. 11.2). [NVIDIA Docs](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-825/install-guide/index.html)
 
