@@ -1,5 +1,7 @@
-# testing_com
-for transferring command line :)
+
+for transferring command line while implementing [FROSS]([url](https://github.com/Howardkhh/FROSS?tab=readme-ov-file#3-run-orb-slam3-on-replicassg))
+
+https://chatgpt.com/share/690adfa4-5648-8005-b49e-a7a68402671b
 
 ```
 # fresh venv recommended
