@@ -33,13 +33,17 @@ Install TensorRT 8.x for CUDA 11.x
 
 Download a CUDA-11.x TensorRT tarball (x86_64) from NVIDIA archives — TensorRT 8.2.5 is a good fit and explicitly supports CUDA 11.0–11.5 (incl. 11.2). [NVIDIA Docs](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-825/install-guide/index.html)
 
-Install NVIDIA’s repo keyring (fixes NO_PUBKEY & lets apt fetch deps):
+1. Install NVIDIA’s repo keyring (fixes NO_PUBKEY & lets apt fetch deps):
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb
 sudo dpkg -i cuda-keyring_1.0-1_all.deb
 sudo apt-get update
 ```
-
+1. Ask apt to auto-fix the broken install (will pull missing CUDA/cuDNN bits):
+```
+sudo apt-get -f install
+```
+1. 
 
 ```
 # 1) Add NVIDIA repo for the desired TensorRT 8.x (CUDA 11.x)  — follow the doc page you select
