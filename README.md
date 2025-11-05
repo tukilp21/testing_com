@@ -111,6 +111,40 @@ export LD_LIBRARY_PATH="$TRT_DIR/lib:${LD_LIBRARY_PATH}"
 # optional: add trtexec to PATH if you want the CLI tool
 export PATH="$TRT_DIR/bin:${PATH}"
 ```
+- e.g., `PATH="_path1_:_path2_:_path3_`
+
+<details>
+  <summary> If `ImportError: libcublas.so.XX cannot open shared object file` </summary>
+  
+Install CUDA XX (compatible version) runtime
+```
+cd ~/opt
+wget https://developer.download.nvidia.com/compute/cuda/11.4.4/local_installers/cuda_11.4.4_470.82.01_linux.run
+chmod +x cuda_11.4.4_470.82.01_linux.run
+```
+
+install libraries
+```
+sudo ./cuda_11.4.4_470.82.01_linux.run --silent --toolkit --no-drm --override
+```
+
+add to environments
+```
+#export TRT_DIR=$HOME/opt/TensorRT-8.2.5.1
+export CUDA11_DIR=/usr/local/cuda-11.4
+# export LD_LIBRARY_PATH=$CUDA11_DIR/lib64:$TRT_DIR/lib:/usr/lib/x86_64-linux-gnu:/opt/ros/melodic/lib
+export LD_LIBRARY_PATH=$CUDA11_DIR/lib64:${LD_LIBRARY_PATH}
+```
+</details>
+
+
+If unsure which CUDA libs are missing:
+```
+export TRT_DIR="$HOME/opt/TensorRT-8.2.5.1"
+ldd "$TRT_DIR/lib/libnvinfer.so" | egrep 'cudart|cublas|cudnn|cufft|not found'
+# or
+ldd "$TRT_DIR/lib/libnvinfer_plugin.so" | egrep 'cudart|cublas|cudnn|cufft|not found'
+```
 
 validation
 ```
@@ -123,6 +157,8 @@ PY
 command -v trtexec && trtexec --version
 ```
 
+!!!!!!!!!!!!!!!!
+Permanently setup env PATH
 ```
 mkdir -p "$(conda info --base)/envs/fross-tst38/etc/conda/activate.d"
 mkdir -p "$(conda info --base)/envs/fross-tst38/etc/conda/deactivate.d"
@@ -155,6 +191,7 @@ sudo apt-get install -y \
 sudo apt-get install -y uff-converter-tf
 ```
 
+---
 ### Install new driver
 ```
 # blacklist Nouveau (open-source driver) so it won't grab the GPU at boot
@@ -166,6 +203,11 @@ Press Ctrl+Alt+F3 to get to TTY, log in, then:
 ```
 sudo systemctl stop gdm 2>/dev/null || sudo systemctl stop lightdm 2>/dev/null || true
 ```
+- `systemctl stop gdm`: Stop the GNOME Display Manager (used by Ubuntu GNOME / GNOME Shell). If your system uses GNOME, this will end the login screen and desktop session.
+- `2>/dev/null`: Redirect error messages (“stderr”) to `/dev/null` (i.e., discard them).
+- `systemctl stop lightdm`: Stop the LightDM service (used by older Ubuntu and Xfce variants).
+- `systemctl stop sddm`: Stop the Simple Desktop Display Manager (used by **KDE** Plasma).
+
 From the directory where you downloaded NVIDIA-Linux-x86_64-580.105.08.run:
 ```
 chmod +x NVIDIA-Linux-x86_64-580.105.08.run
