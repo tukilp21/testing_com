@@ -33,22 +33,13 @@ Install TensorRT 8.x for CUDA 11.x
 
 Download a CUDA-11.x TensorRT tarball (x86_64) from NVIDIA archives — TensorRT 8.2.5 is a good fit and explicitly supports CUDA 11.0–11.5 (incl. 11.2). [NVIDIA Docs](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-825/install-guide/index.html)
 
-Extract & install the Python wheel that matches your Python:
+Install NVIDIA’s repo keyring (fixes NO_PUBKEY & lets apt fetch deps):
 ```
-# example — adjust to your exact file name & location
-tar -xzf TensorRT-8.2.5.*.Linux.x86_64-gnu.cuda-11.*.cudnn8.*.tar.gz
-cd TensorRT-8.2.5.*
-
-# Install the Python bindings (pick the wheel that matches your Python):
-python -m pip install python/tensorrt-8.2.5.*-cp39-none-linux_x86_64.whl
-# (if you also need parsers / extras)
-python -m pip install python/onnx_graphsurgeon-*.whl  # optional
-
-#Expose the shared libs at runtime:
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$(pwd)/lib"
-# add that line to ~/.bashrc so it persists
-
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
 ```
+
 
 ```
 # 1) Add NVIDIA repo for the desired TensorRT 8.x (CUDA 11.x)  — follow the doc page you select
