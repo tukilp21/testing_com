@@ -1,16 +1,15 @@
 
-for transferring command line while implementing [FROSS]([url](https://github.com/Howardkhh/FROSS?tab=readme-ov-file#3-run-orb-slam3-on-replicassg))
+for transferring command line while implementing [FROSS](https://github.com/Howardkhh/FROSS?tab=readme-ov-file#3-run-orb-slam3-on-replicassg)
 
-https://chatgpt.com/share/690adfa4-5648-8005-b49e-a7a68402671b
+[ChatGPT instruction](https://chatgpt.com/share/690adfa4-5648-8005-b49e-a7a68402671b)
 
 ## Note
-- to deal with [root running out of memory]([url](https://askubuntu.com/questions/57994/root-drive-is-running-out-of-disk-space-how-can-i-free-up-space))
+- to deal with [root running out of memory](https://askubuntu.com/questions/57994/root-drive-is-running-out-of-disk-space-how-can-i-free-up-space)
 
 ---
 
 ## Dataset
-[download script]([url](https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432)) for 3RScan dataset
-https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432
+[download script](https://gist.github.com/WaldJohannaU/55f5e35992ea91157b789b15eac4d432) for 3RScan dataset
 
 ## Env / Dir setup
 
@@ -86,15 +85,52 @@ sudo apt-get -f install
 
 1. Download the TensorRT 8.2.5.1 (CUDA 11.x) tar from NVIDIA (x86_64).
 
-1. Install the Python 3.8 wheel from inside the tar:
+1. Install the **Python 3.8 wheel** from inside the tar:
 ```
- # adjust the filename/path to your actual tar
+# adjust the filename/path to your actual tar
 tar -xzf TensorRT-8.2.5.1.Linux.x86_64-gnu.cuda-11.*.tar.gz
 cd TensorRT-8.2.5.1
 python -m pip install python/tensorrt-8.2.5.1-cp38-none-linux_x86_64.whl
- ```
+```
+
 Make sure the loader can find the runtime libs from your apt install:
-`export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"`
+```
+# point to TensorRT's lib directory from the tar
+export TRT_DIR="$HOME/opt/TensorRT-8.2.5.1"
+export LD_LIBRARY_PATH="$TRT_DIR/lib:${LD_LIBRARY_PATH}"
+# optional: add trtexec to PATH if you want the CLI tool
+export PATH="$TRT_DIR/bin:${PATH}"
+```
+
+validation
+```
+python - <<'PY'
+import os, tensorrt as trt
+print("TRT:", trt.__version__)
+print("LD_LIBRARY_PATH:", os.environ.get("LD_LIBRARY_PATH","")[:200], "...")
+PY
+# optional: trtexec
+command -v trtexec && trtexec --version
+```
+
+```
+mkdir -p "$(conda info --base)/envs/fross-tst38/etc/conda/activate.d"
+mkdir -p "$(conda info --base)/envs/fross-tst38/etc/conda/deactivate.d"
+
+# activation hook
+cat > "$(conda info --base)/envs/fross-tst38/etc/conda/activate.d/env_vars.sh" <<'EOF'
+export TRT_DIR="$HOME/opt/TensorRT-8.2.5.1"
+export LD_LIBRARY_PATH="$TRT_DIR/lib:${LD_LIBRARY_PATH}"
+export PATH="$TRT_DIR/bin:${PATH}"
+EOF
+
+# deactivation hook
+cat > "$(conda info --base)/envs/fross-tst38/etc/conda/deactivate.d/env_vars.sh" <<'EOF'
+unset TRT_DIR
+export LD_LIBRARY_PATH=$(echo "$LD_LIBRARY_PATH" | sed "s|$HOME/opt/TensorRT-8.2.5.1/lib:||")
+export PATH=$(echo "$PATH" | sed "s|$HOME/opt/TensorRT-8.2.5.1/bin:||")
+EOF
+```
    
 
 1. Install TensorRT runtime + Python bindings
