@@ -15,18 +15,14 @@ df -h /
 sudo du -hxd1 | sort -h | tail
 ```
 
-- install new driver (580 for ubuntu 18.04) for CUDA 12.1 capability - try whatever packages version they suggested
-- 
+- install new driver (580 for ubuntu 18.04) for CUDA 12.1 capability - try whatever packages version they suggested, but
+<details>
+  <summary> Never, ever, install using Nvidia's .run script - Reddit user </summary>
 
-
-
---------------------------------
---------------------------------
-### Install new driver
-
+And the below are my clueless ChatGPT-following that cost me another long evening
 download from [nvidia.com](https://www.nvidia.com/en-us/drivers/)
 
-> .run installs are “manual”. They’re fine, but you must stop X, blacklist nouveau, and have kernel headers. If Secure Boot is enabled, you’ll need to disable it or sign the kernel module.
+> .run installs are **“manual”.** They’re fine, but you must stop X, blacklist nouveau, and have kernel headers. If Secure Boot is enabled, you’ll need to disable it or sign the kernel module.
 
 ```
 # packages needed to build the kernel module
@@ -62,6 +58,7 @@ sudo reboot
 nvidia-smi
 ```
 ---
+</details>
 
 ## Env / Dir setup - for Cuda 11.1 (previously)
 
